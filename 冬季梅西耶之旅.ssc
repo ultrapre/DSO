@@ -1,0 +1,264 @@
+//
+// Name: 冬季梅西耶之旅
+// License: Public Domain
+// Author: 灯宅@https://space.bilibili.com/102586426
+// Description: 结合实际观测手绘深空天体图，以及Stellarium的脚本模拟，还原了20×80大双筒（视场3.2°，可以在良好环境下进行大多数梅西耶天体的目视）在2月上旬的晚上20-01时的梅西耶天体观测历程。目标多为星系，按时段和方位进行天区目视，总数约占梅西耶星表半数，可以视为梅西耶马拉松的前半历程。
+
+include("common_objects.inc");
+core.clear("deepspace");
+
+var earlyWest = ["M31", "M33", "M34", "M76", "M103", "M76", "M52"];
+
+var earlyEast = ["M42", "M78", "M41", "M50", "M46", "M47", "M93", "M48", "M44", "M67", "M79"];
+
+var earlyMiddle = ["M45", "M38", "M36", "M37", "M35", "M1"];
+
+
+var laterNorth = ["M81", "M82", "M108", "M97", "M109", "M40", "M106", "M101", "M51", "M63", "M94", "M101", "M102"];
+
+var laterEast1 = ["M3", "M53", "M64"];
+
+var laterVirgo = ["M98", "M99", "M100", "M85", "M100", "M91", "M88", "M86", "M84", "M87", "M89", "M90", "M58", "M59", "M60", "M49"];
+
+var laterEast2 = ["M61", "M65", "M66", "M68"];
+
+
+
+
+
+ConstellationMgr.setFlagIsolateSelected(true);
+ConstellationMgr.setFlagBoundaries(false);
+ConstellationMgr.setFlagLines(true);
+
+StelMovementMgr.setEquatorialMount(false);
+
+LandscapeMgr.setFlagLandscape(true);
+LandscapeMgr.setFlagAtmosphere(true);
+
+LabelMgr.labelScreen("冬季常见深空探寻",200,200,true,30,"#ff0000");
+//core.wait(6);
+core.wait(3);
+LabelMgr.deleteAllLabels();
+core.wait(1);
+
+
+
+
+
+
+StelMovementMgr.lookWest();
+//StelMovementMgr.lookZenith();
+StelMovementMgr.zoomTo(80,4);
+core.wait(4);
+LabelMgr.labelScreen("早西天",200,200,true,30,"#ff0000");
+
+core.wait(6);
+LabelMgr.deleteAllLabels();
+core.wait(1);
+for (i=0; i<earlyWest.length; i++)
+{
+	objName = earlyWest[i];
+	core.selectObjectByName(objName, true);
+	
+	StelMovementMgr.setFlagTracking(true);
+	StelMovementMgr.zoomTo(80,4);
+	core.wait(4);
+	StelMovementMgr.zoomTo(3.2,4);
+	core.wait(14);
+	StelMovementMgr.zoomTo(80,4);
+	core.wait(8);
+}
+
+
+
+
+StelMovementMgr.lookSouth();
+StelMovementMgr.zoomTo(80,4);
+core.wait(4);
+LabelMgr.labelScreen("早南天",200,200,true,30,"#ff0000");
+//NebulaMgr.setFlagOutlines(true);
+//NebulaMgr.setFlagAdditionalNames(true);
+core.wait(6);
+LabelMgr.deleteAllLabels();
+core.wait(1);
+
+
+for (i=0; i<earlyEast.length; i++)
+{
+	objName = earlyEast[i];
+	core.selectObjectByName(objName, true);
+	
+	//StelMovementMgr.autoZoomIn(2);
+	///core.selectObjectByName("M42", true);
+	
+	StelMovementMgr.setFlagTracking(true);
+	StelMovementMgr.zoomTo(80,4);
+	core.wait(4);
+	StelMovementMgr.zoomTo(3.2,4);
+	core.wait(14);
+	
+	//StelMovementMgr.getCurrentFov();
+	//LabelMgr.labelScreen(StelMovementMgr.getCurrentFov(),200,200,true,30,"#ff0000");
+	
+	StelMovementMgr.zoomTo(80,4);
+	core.wait(8);
+}
+
+
+StelMovementMgr.lookZenith();
+StelMovementMgr.zoomTo(80,4);
+core.wait(4);
+LabelMgr.labelScreen("早中天",200,200,true,30,"#ff0000");
+
+core.wait(6);
+LabelMgr.deleteAllLabels();
+core.wait(1);
+for (i=0; i<earlyMiddle.length; i++)
+{
+	objName = earlyMiddle[i];
+	core.selectObjectByName(objName, true);
+	
+	//StelMovementMgr.autoZoomIn(2);
+	StelMovementMgr.setFlagTracking(true);
+	StelMovementMgr.zoomTo(80,4);
+	core.wait(4);
+	StelMovementMgr.zoomTo(3.2,4);
+	core.wait(14);
+	StelMovementMgr.zoomTo(80,4);
+	core.wait(8);
+}
+
+
+
+
+
+
+
+StelMovementMgr.lookNorth();
+StelMovementMgr.zoomTo(80,4);
+core.wait(4);
+LabelMgr.labelScreen("晚北天",200,200,true,30,"#ff0000");
+
+core.wait(6);
+LabelMgr.deleteAllLabels();
+core.wait(1);
+for (i=0; i<laterNorth.length; i++)
+{
+	objName = laterNorth[i];
+	core.selectObjectByName(objName, true);
+	
+	StelMovementMgr.setFlagTracking(true);
+	StelMovementMgr.zoomTo(80,4);
+	core.wait(4);
+	StelMovementMgr.zoomTo(3.2,4);
+	core.wait(14);
+	StelMovementMgr.zoomTo(80,4);
+	core.wait(8);
+}
+
+
+
+
+StelMovementMgr.lookEast();
+StelMovementMgr.zoomTo(80,4);
+core.wait(4);
+LabelMgr.labelScreen("晚东天(1)",200,200,true,30,"#ff0000");
+
+core.wait(6);
+LabelMgr.deleteAllLabels();
+core.wait(1);
+for (i=0; i<laterEast1.length; i++)
+{
+	objName = laterEast1[i];
+	core.selectObjectByName(objName, true);
+	
+	StelMovementMgr.setFlagTracking(true);
+	StelMovementMgr.zoomTo(80,4);
+	core.wait(4);
+	StelMovementMgr.zoomTo(3.2,4);
+	core.wait(14);
+	StelMovementMgr.zoomTo(80,4);
+	core.wait(8);
+}
+
+
+
+
+
+
+core.selectObjectByName("M98", true);
+StelMovementMgr.setFlagTracking(true);
+//StelMovementMgr.lookEast();
+StelMovementMgr.zoomTo(80,4);
+core.wait(4);
+LabelMgr.labelScreen("室女座星系团",200,200,true,30,"#ff0000");
+
+core.wait(6);
+LabelMgr.deleteAllLabels();
+core.wait(1);
+for (i=0; i<laterVirgo.length; i++)
+{
+	objName = laterVirgo[i];
+	core.selectObjectByName(objName, true);
+	
+	StelMovementMgr.setFlagTracking(true);
+	//StelMovementMgr.zoomTo(80,4);
+	core.wait(4);
+	StelMovementMgr.zoomTo(3.2,4);
+	core.wait(5);
+	//StelMovementMgr.zoomTo(80,4);
+	core.wait(8);
+}
+
+
+
+
+
+
+
+StelMovementMgr.lookEast();
+StelMovementMgr.zoomTo(80,4);
+core.wait(4);
+LabelMgr.labelScreen("晚东天(2)",200,200,true,30,"#ff0000");
+
+core.wait(6);
+LabelMgr.deleteAllLabels();
+core.wait(1);
+for (i=0; i<laterEast2.length; i++)
+{
+	objName = laterEast2[i];
+	core.selectObjectByName(objName, true);
+	
+	StelMovementMgr.setFlagTracking(true);
+	StelMovementMgr.zoomTo(80,4);
+	core.wait(4);
+	StelMovementMgr.zoomTo(3.2,4);
+	core.wait(14);
+	StelMovementMgr.zoomTo(80,4);
+	core.wait(8);
+}
+
+
+
+StelMovementMgr.zoomTo(80,4);
+core.wait(8);
+
+LabelMgr.labelScreen("额外的收获：武仙座双星团NGC 869",200,200,true,30,"#ff0000");
+core.wait(6);
+//core.wait(3);
+LabelMgr.deleteAllLabels();
+core.wait(1);
+
+
+objName = "NGC 869";
+core.selectObjectByName(objName, true);
+
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(80,4);
+core.wait(4);
+StelMovementMgr.zoomTo(3.2,4);
+core.wait(14);
+StelMovementMgr.zoomTo(80,4);
+core.wait(8);
+
+
