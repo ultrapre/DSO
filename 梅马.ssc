@@ -1,10 +1,12 @@
+//
+// Name: 冬季梅西耶之旅
+// License: Public Domain
+// Author: 灯宅@https://space.bilibili.com/102586426
+// Description: 参照一个梅西耶天体马拉松的真实历程记录（高兴老师的观测报表http://www.xjltp.com/2_huodong/2_030301.htm），用Stellarium实时模拟了2020年春季共110个梅西耶天体的全程观测历程。里面对跑梅马的心得和感受也有一定记录，可以作为春季梅马的预习工具。
 
 include("common_objects.inc");
 core.clear("deepspace");
 
-//Reference:
-//观测数据参考了高兴老师的观测报表 (the simulation data is referrenced from GaoXing's Observation report)
-//参考地址: (referrence address:) http://www.xjltp.com/2_huodong/2_030301.htm
 
 //清空
 LabelMgr.deleteAllLabels();
