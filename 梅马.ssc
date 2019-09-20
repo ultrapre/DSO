@@ -2,6 +2,10 @@
 include("common_objects.inc");
 core.clear("deepspace");
 
+//Reference:
+//观测数据参考了高兴老师的观测报表 (the simulation data is referrenced from GaoXing's Observation report)
+//参考地址: (referrence address:) http://www.xjltp.com/2_huodong/2_030301.htm
+
 //清空
 LabelMgr.deleteAllLabels();
 MarkerMgr.deleteAllMarkers();
