@@ -9,7 +9,7 @@ core.clear("deepspace");
 
 var earlyWest = ["M31", "M33", "M34", "M76", "M103", "M76", "M52"];
 
-var earlyEast = ["M42", "M78", "M41", "M50", "M46", "M47", "M93", "M48", "M44", "M67", "M79"];
+var earlySouth = ["M42", "M78", "M41", "M50", "M46", "M47", "M93", "M48", "M44", "M67", "M79"];
 
 var earlyMiddle = ["M45", "M38", "M36", "M37", "M35", "M1"];
 
@@ -24,7 +24,7 @@ var laterEast2 = ["M61", "M65", "M66", "M68"];
 
 
 
-
+core.setDate("2019-02-03T20:30:00", "local");
 
 
 ConstellationMgr.setFlagIsolateSelected(true);
@@ -65,9 +65,9 @@ for (i=0; i<earlyWest.length; i++)
 	StelMovementMgr.zoomTo(80,4);
 	core.wait(4);
 	StelMovementMgr.zoomTo(3.2,4);
-	core.wait(14);
+	core.wait(6);
 	StelMovementMgr.zoomTo(80,4);
-	core.wait(8);
+	core.wait(5);
 }
 
 
@@ -77,33 +77,25 @@ StelMovementMgr.lookSouth();
 StelMovementMgr.zoomTo(80,4);
 core.wait(4);
 LabelMgr.labelScreen("早南天",200,200,true,30,"#ff0000");
-//NebulaMgr.setFlagOutlines(true);
-//NebulaMgr.setFlagAdditionalNames(true);
 core.wait(6);
 LabelMgr.deleteAllLabels();
 core.wait(1);
 
 
-for (i=0; i<earlyEast.length; i++)
+for (i=0; i<earlySouth.length; i++)
 {
-	objName = earlyEast[i];
+	objName = earlySouth[i];
 	core.selectObjectByName(objName, true);
-	
-	//StelMovementMgr.autoZoomIn(2);
-	///core.selectObjectByName("M42", true);
 	
 	StelMovementMgr.setFlagTracking(true);
 	StelMovementMgr.zoomTo(80,4);
 	core.wait(4);
 	StelMovementMgr.zoomTo(3.2,4);
-	core.wait(14);
-	
-	//StelMovementMgr.getCurrentFov();
-	//LabelMgr.labelScreen(StelMovementMgr.getCurrentFov(),200,200,true,30,"#ff0000");
-	
+	core.wait(6);
 	StelMovementMgr.zoomTo(80,4);
-	core.wait(8);
+	core.wait(5);
 }
+
 
 
 StelMovementMgr.lookZenith();
@@ -119,18 +111,19 @@ for (i=0; i<earlyMiddle.length; i++)
 	objName = earlyMiddle[i];
 	core.selectObjectByName(objName, true);
 	
-	//StelMovementMgr.autoZoomIn(2);
 	StelMovementMgr.setFlagTracking(true);
 	StelMovementMgr.zoomTo(80,4);
 	core.wait(4);
 	StelMovementMgr.zoomTo(3.2,4);
-	core.wait(14);
+	core.wait(6);
 	StelMovementMgr.zoomTo(80,4);
-	core.wait(8);
+	core.wait(5);
 }
 
 
 
+
+core.setDate("2019-02-03T00:30:00", "local");
 
 
 
@@ -152,13 +145,13 @@ for (i=0; i<laterNorth.length; i++)
 	StelMovementMgr.zoomTo(80,4);
 	core.wait(4);
 	StelMovementMgr.zoomTo(3.2,4);
-	core.wait(14);
+	core.wait(6);
 	StelMovementMgr.zoomTo(80,4);
-	core.wait(8);
+	core.wait(5);
 }
 
 
-
+core.setDate("2019-02-03T01:30:00", "local");
 
 StelMovementMgr.lookEast();
 StelMovementMgr.zoomTo(80,4);
@@ -177,19 +170,18 @@ for (i=0; i<laterEast1.length; i++)
 	StelMovementMgr.zoomTo(80,4);
 	core.wait(4);
 	StelMovementMgr.zoomTo(3.2,4);
-	core.wait(14);
+	core.wait(6);
 	StelMovementMgr.zoomTo(80,4);
-	core.wait(8);
+	core.wait(5);
 }
 
 
 
-
+core.setDate("2019-02-03T01:30:00", "local");
 
 
 core.selectObjectByName("M98", true);
 StelMovementMgr.setFlagTracking(true);
-//StelMovementMgr.lookEast();
 StelMovementMgr.zoomTo(80,4);
 core.wait(4);
 LabelMgr.labelScreen("室女座星系团",200,200,true,30,"#ff0000");
@@ -203,17 +195,15 @@ for (i=0; i<laterVirgo.length; i++)
 	core.selectObjectByName(objName, true);
 	
 	StelMovementMgr.setFlagTracking(true);
-	//StelMovementMgr.zoomTo(80,4);
 	core.wait(4);
 	StelMovementMgr.zoomTo(3.2,4);
 	core.wait(5);
-	//StelMovementMgr.zoomTo(80,4);
-	core.wait(8);
+	core.wait(5);
 }
 
 
 
-
+core.setDate("2019-02-03T01:30:00", "local");
 
 
 
@@ -221,7 +211,6 @@ StelMovementMgr.lookEast();
 StelMovementMgr.zoomTo(80,4);
 core.wait(4);
 LabelMgr.labelScreen("晚东天(2)",200,200,true,30,"#ff0000");
-
 core.wait(6);
 LabelMgr.deleteAllLabels();
 core.wait(1);
@@ -234,23 +223,23 @@ for (i=0; i<laterEast2.length; i++)
 	StelMovementMgr.zoomTo(80,4);
 	core.wait(4);
 	StelMovementMgr.zoomTo(3.2,4);
-	core.wait(14);
+	core.wait(6);
 	StelMovementMgr.zoomTo(80,4);
-	core.wait(8);
+	core.wait(5);
 }
 
 
 
+
+core.setDate("2019-02-03T21:30:00", "local");
+
 StelMovementMgr.zoomTo(80,4);
-core.wait(8);
+core.wait(4);
 
 LabelMgr.labelScreen("额外的收获：武仙座双星团NGC 869",200,200,true,30,"#ff0000");
 core.wait(6);
-//core.wait(3);
 LabelMgr.deleteAllLabels();
 core.wait(1);
-
-
 objName = "NGC 869";
 core.selectObjectByName(objName, true);
 
@@ -258,8 +247,8 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(80,4);
 core.wait(4);
 StelMovementMgr.zoomTo(3.2,4);
-core.wait(14);
+core.wait(6);
 StelMovementMgr.zoomTo(80,4);
-core.wait(8);
+core.wait(5);
 
 
