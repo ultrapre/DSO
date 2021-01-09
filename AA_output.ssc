@@ -1,0 +1,34 @@
+var start = 1;
+var end   = 39;
+var name = "49";
+for (var i = start; i <= end; i++){
+var obj = core.getObjectInfo("Marker "+parseInt(i));
+if (obj["found"]==false)
+continue;
+var ra = obj["raJ2000"];
+var dec= obj["decJ2000"];
+if(ra<0)
+ra=ra+360;
+ra=ra/15;
+ra=ra.toString();
+dec=dec.toString();
+
+if(dec>0){
+dec="+"+dec;
+}
+
+if(ra.substr(1,1)==".")
+ra="0"+ra;
+if(dec.substr(2,1)==".")
+dec=dec.substr(0,1)+"0"+dec.substr(1,7);
+
+if(i==start)
+	core.output(ra.substr(0,8)+" "+dec.substr(0,9)+" start  "+name);
+else
+{
+if(i==end)
+	core.output(ra.substr(0,8)+" "+dec.substr(0,9)+" end    ");
+else
+	core.output(ra.substr(0,8)+" "+dec.substr(0,9)+" vertex ");
+}
+}
