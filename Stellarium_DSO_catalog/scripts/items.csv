@@ -1,0 +1,46 @@
+id,num,type,console,note
+id,1,integer,-,deep-sky object identificator
+ra,2,float,%COO(d;A;FK5;J2000),RA (decimal degrees)
+dec,3,float,%COO(d;D;FK5;J2000),Dec (decimal degrees)
+bmag,4,float,"%FLUXLIST(;N=F,)",B magnitude
+vmag,5,float,"%FLUXLIST(;N=F,)",V magnitude
+otype,6,string,%OTYPE(3),"Object type (G, GX, GC, OC, NB, PN, DN, RN, C+N, HA, HII, SNR, BN, EN, SA, SC, RG, CL, IG, QSO or empty)"
+mtype,7,string,%MT(M),Morphological type of object
+ax,8,float,%DIM(X),Major axis size or radius (arcmin)
+ay,9,float,%DIM(Y),Minor axis size (arcmin)
+pa,10,integer,%DIM(A),Orientation angle (degrees)
+red,11,float,%RV(Z E),Redshift
+rede,12,float,%RV(Z E),Error of redshift
+par,13,float,%PLX(V E),Parallax (mas)
+pare,14,float,%PLX(V E),Error of parallax (mas)
+dist,15,float,-,Non-redshift distance (kpc)
+diste,16,float,-,Error of non-redsift distance (kpc)
+ngc,17,integer,%IDLIST(A;NGC),NGC number (New General Catalogue)
+ic,18,integer,%IDLIST(A;IC),IC number (Index Catalogue)
+m,19,integer,%IDLIST(A;M),M number (Messier Catalog)
+c,20,integer,-,C number (Caldwell Catalogue)
+b,21,integer,%IDLIST(A;Barnard),B number (Barnard Catalogue)
+sh2,22,integer,%IDLIST(A;SH 2),Sh2 number (Sharpless Catalogue)
+vdb,23,integer,%IDLIST(A;VdB),VdB number (Van den Bergh Catalogue of reflection nebulae)
+rcw,24,integer,%IDLIST(A;RCW),RCW number (A catalogue of Hα-emission regions in the southern Milky Way)
+ldn,25,integer,%IDLIST(A;LDN),LDN number (Lynds' Catalogue of Dark Nebulae)
+lbn,26,integer,%IDLIST(A;LBN) ,LBN number (Lynds' Catalogue of Bright Nebulae)
+cr,27,integer,%IDLIST(A;Cl Collinder),Cr number (Collinder Catalogue)
+mel,28,integer,%IDLIST(A;Cl Melotte),Mel number (Melotte Catalogue of Deep Sky Objects)
+pgc,29,integer,%IDLIST(A;PGC),PGC number (HYPERLEDA. I. Catalog of galaxies)
+ugc,30,integer,%IDLIST(A;UGC),UGC number (The Uppsala General Catalogue of Galaxies)
+ced,31,string,%IDLIST(A;Ced),Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)
+arp,32,integer,%IDLIST(A;AGP),Arp number (Atlas of Peculiar Galaxies)
+vv,33,integer,%IDLIST(A;VV)    VV [0-9a-z]*,VV number (The catalogue of interacting galaxies by Vorontsov-Velyaminov)
+pk,34,string,%IDLIST(A;PK) ,PK identificator (Catalogue of Galactic Planetary Nebulae)
+png,35,string,%IDLIST(A;PN G),PN G identificator (Strasbourg-ESO Catalogue of Galactic Planetary Nebulae)
+snrg,36,string,%IDLIST(A;SNR G),SNR G identificator (A catalogue of Galactic supernova remnants)
+aco,37,string,%IDLIST(A;ACO) %IDLIST(A;ACO S),ACO number (Rich Clusters of Galaxies by Abell et. al.)
+hcg,38,string,%IDLIST(A;HCG),HCG identificator (Hickson Compact Group by Hickson P.)
+eso,39,string,%IDLIST(A;ESO),ESO identificator (ESO/Uppsala survey of the ESO(B) atlas by Lauberts)
+vdbh,40,string,-,VdBH identificator (Van den Bergh and Herbst; Catalogue of southern stars embedded in nebulosity)
+dwb,41,integer,%IDLIST(A;DWB),DWB number (Catalogue and distances of optically visible H II regions)
+tr,42,integer,%IDLIST(A;Cl Trumpler),Tr number (Trumpler Catalogue)
+st,43,integer,%IDLIST(A;Cl Stock),St number (Stock Catalogue)
+ru,44,integer,%IDLIST(A;Cl Ruprecht),Ru number (Ruprecht Catalogue)
+vdbha,45,indeger,%IDLIST(A;Cl VDBH),VdB-Ha number (van den Bergh-Hagen Catalogue)
