@@ -1,0 +1,257 @@
+
+[File]
+group=Mag
+
+[Data]
+type=obs
+date=1996 1 1
+mag=13.3
+
+type=obs
+date=1996 1 30
+mag=11.0
+
+type=obs
+date=1996 1 31
+mag=12.0
+
+type=obs
+date=1996 2 1
+mag=10.1
+
+type=obs
+date=1996 02 10
+mag=9.0
+
+type=obs
+date=1996 2 17
+mag=7.9
+
+type=obs
+date=1996 2 18
+mag=8.5
+
+type=obs
+date=1996 2 21
+mag=7.2
+
+type=obs
+date=1996 2 23
+mag=6.8
+
+type=obs
+date=1996 2 24
+mag=7.0
+
+type=obs
+date=1996 2 25
+mag=7.5
+
+type=obs
+date=1996 2 27
+mag=6.9
+
+type=obs
+date=1996 2 29
+mag=6.5
+
+type=obs
+date=1996 3 02
+mag=6.8
+
+type=obs
+date=1996 3 2
+mag=5.8
+
+type=obs
+date=1996 03 03
+mag=5.8
+
+type=obs
+date=1996 3 6
+mag=5.0:
+
+type=obs
+date=1996 03 09
+mag=5.0
+
+type=obs
+date=1996 3 11
+mag=4.3
+
+type=obs
+date=1996 3 12
+mag=4.5
+
+type=obs
+date=1996 3 12
+mag=4.8
+
+type=obs
+date=1996 3 13
+mag=4.5
+
+type=obs
+date=1996 03 15
+mag=3.6
+
+type=obs
+date=1996 03 18
+mag=3.4
+
+type=obs
+date=1996 3 19
+mag=2.5
+
+type=obs
+date=1996 3 21
+mag=1.7
+
+type=obs
+date=1996 3 22
+mag=1.0
+
+type=obs
+date=1996 3 23
+mag=0.3
+
+type=obs
+date=1996 3 23
+mag=1.0
+
+type=obs
+date=1996 3 23
+mag=0.2
+
+type=obs
+date=1996 3 24
+mag=0.0
+
+type=obs
+date=1996 3 24
+mag=+0.6
+
+type=obs
+date=1996 3 24
+mag=-0.1
+
+type=obs
+date=1996 3 25
+mag=0.2
+
+type=obs
+date=1996 3 25
+mag=-0.3
+
+type=obs
+date=1996 03 25
+mag=0.4
+
+type=obs
+date=1996 3 26
+mag=+0.3
+
+type=obs
+date=1996 03 26
+mag=0.2
+
+type=obs
+date=1996 3 27
+mag=-0.3
+
+type=obs
+date=1996 3 28
+mag=0.5
+
+type=obs
+date=1996 3 28
+mag=0.5
+
+type=obs
+date=1996 4 1
+mag=1.8
+
+type=obs
+date=1996 4 3
+mag=2.1
+
+type=obs
+date=1996 04 05
+mag=2.3
+
+type=obs
+date=1996 4 10
+mag=2.3
+
+type=obs
+date=1996 04 12
+mag=2.8
+
+type=obs
+date=1996 4 14
+mag=2.3
+
+type=obs
+date=1996 4 18
+mag=2.2
+
+type=obs
+date=1996 4 19
+mag=1.9
+
+type=obs
+date=1996 4 21
+mag=1.8
+
+type=obs
+date=1996 4 22
+mag=3.1
+
+type=obs
+date=1996 4 24
+mag=2.5
+
+type=obs
+date=1996 4 27
+mag=2.5
+
+type=obs
+date=1996 5 10
+mag=2.8:
+
+type=obs
+date=1996 5 17
+mag=3.9
+
+type=obs
+date=1996 5 24
+mag=4.2
+
+type=obs
+date=1996 5 30
+mag=4.8
+
+type=obs
+date=1996 6 20
+mag=6.4
+
+type=obs
+date=1996 7 7
+mag=6.9
+
+type=obs
+date=1996 7 19
+mag=7.6
+
+type=obs
+date=1996 8 10
+mag=9.5
+
+type=obs
+date=1996 9 9
+mag=~12
+
+type=obs
+date=1996 10 24
+mag=16.8
+

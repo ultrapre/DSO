@@ -1,0 +1,114 @@
+<View id="4" did="0" type="Button">
+<ppt>width=-2
+height=-2
+text=GVB彗星数据
+layout_margintop=478dp
+layout_marginleft=181dp</ppt>
+<event><eventItme type="clicki">
+
+s a = "http://astro.vanbuitenen.nl/comets"
+hws(a)</eventItme></event>
+</View>
+<View id="5" did="0" type="Button">
+<ppt>width=-2
+height=-2
+text=COBS彗星数据
+layout_margintop=167dp
+layout_marginleft=137dp</ppt>
+<event><eventItme type="clicki">
+
+s a = "https://cobs.si/"
+hws(a)</eventItme></event>
+</View>
+<View id="6" did="0" type="Button">
+<ppt>width=-2
+height=-2
+text=下载cobs数据
+layout_margintop=-384dp
+layout_marginleft=19dp</ppt>
+<event><eventItme type="clicki">
+
+
+t()
+{
+  
+
+s a = "https://www.minorplanetcenter.net/iau/Ephemerides/Comets/Soft00Cmt.txt"
+s b = "comets/cobsComets.txt"
+hd(a, b, true, c)
+syso(c)
+
+}</eventItme></event>
+</View>
+<View id="7" did="0" type="Button">
+<ppt>width=-2
+height=-2
+text=下载gvb彗星数据
+layout_margintop=-45dp
+layout_marginleft=136dp</ppt>
+<event><eventItme type="clicki">
+
+t()
+{
+s a = "http://astro.vanbuitenen.nl/cometelements?format=kstars&mag=obs"
+s b = "comets/gvbCometskde.txt"
+hd(a, b, true, "format=kstars&mag=obs", "utf-8", null, true, null, b)
+syso(b)
+}</eventItme></event>
+</View>
+<View id="8" did="0" type="Button">
+<ppt>width=-2
+height=-2
+text=输出彗星数据
+layout_margintop=-48dp
+layout_marginleft=283dp</ppt>
+<event><eventItme type="clicki">s a = "%comets/gvbCometskde.txt"
+s b = "utf-8"
+fr(a, b, c)
+
+sl(c,"\n",d)
+s i=0
+
+
+//syso(sss.cometname)
+
+
+for(its;d)
+{
+  //syso(i)
+  //s+(1,i)
+  supper(sss.cometname,cname)
+  
+  sl(its,",",itx)
+  sgsz(itx,0,it)
+  //syso(g)
+  se(it,cname, 0, d)
+  se(d, "find", e)
+  f(e == true)
+  {
+    syso(it)
+  }
+  else
+  {
+  }
+  
+  
+}
+
+//syso(c)</eventItme></event>
+</View>
+<View id="9" did="0" type="EditText">
+<ppt>width=1000
+height=150
+text=C/
+layout_margintop=-108dp
+layout_marginleft=18dp</ppt>
+<event><eventItme type="ontextchanged">
+
+sss cometname
+
+ug(9,"text",sss.cometname)
+
+//syso(sss.cometname)</eventItme></event>
+</View>
+<UIEventset></UIEventset>

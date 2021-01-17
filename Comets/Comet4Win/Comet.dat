@@ -1,0 +1,56 @@
+
+[File]
+group=Comets
+
+
+[Data]
+name=C/1995 O1 (Hale-Bopp)
+code=1995 O1
+dbfile=1995O1.db
+type=orbit
+T=1997 4  1.13809
+q=0.9141384
+e=0.9951045
+peri=130.58954
+node=282.47063
+i=89.42969
+orig.1/a=+0.0038306
+fut.1/a=+0.0055999
+epoch=1997 3 13.0
+prec=2000.0
+arc1=1993 4 27
+arc2=1997 6 4
+obs=2144
+perturbation=9 Planets, Moon and 5 minor planets
+residual=0.80
+who=Kenji Muraoka
+mageq=-2 10 [,-250]
+mageq=-0.64 7.96 [-250,]
+
+name=C/1996 B2 (Hyakutake)
+code=1996 B2
+dbfile=1996B2.db
+type=orbit
+T=1996 5  1.39481
+q=0.2302239
+e=0.9997730
+peri=130.17654
+node=188.04546
+i=124.92379
+A1=+2.56
+A2=+0.0485
+epoch=1996 4 27.0
+prec=2000.0
+arc1=1996 1 1
+arc2=1996 11 2
+obs=799
+perturbation=9 Planets, Moon and 5 minor planets
+residual=0.83
+who=Kenji Muraoka
+mageq=6.5 10.0 [,-85]
+mageq=5.2 8.7 [-85,-20]
+mageq=4.6 5.0 [-20,35]
+mageq=4.6 8.2 [35,90]
+mageq=2.0 18.0 [90,150]
+mageq=6.3 15.0 [150,]
+
