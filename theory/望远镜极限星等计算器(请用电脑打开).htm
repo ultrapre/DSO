@@ -1,0 +1,339 @@
+<html>
+<head>
+	<title>Telescope Limiting Magnitude Calculator</title>
+	<meta name="keywords" content="telescope,cruxis,magnitude,limiting magnitude,visual observations">
+	<meta name="description" content="Compute the Limiting Magnitude of your Telescope">
+	<meta name="author" content="Cruxis, Robert Houdart">
+	<meta name="robots" content="index,follow">
+	<meta http-equiv="Content-Language" content="en">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Page-Exit" content="BlendTrans(Duration=0.3)">
+	<style>
+		html {font-size: 13px}
+		body {color: #000; background-color: #3477cf; margin: 15 8; padding: 0; font-family: Verdana, Helvetica, sans-serif;
+			text-align: justify; line-height: 1.3em;}
+		table {font-size: 1em; text-align: justify; line-height: 1.3em;}
+		h2 {padding: 0.2em 0 0.2em 0.7em; margin: 1em 0 0.5em 0; background-color: #456; color: #fff;
+			font-family: Arial, Helvetica, sans-serif; text-decoration: none; font-size: 18px; font-weight: bold}
+		small {font-size: 10px}
+		dl {margin: 0.5em 0.5em 1.5em 0.7em}
+		dt {margin-top: 0.8em; margin-bottom: 0.1em; padding-left: 0.3em; font-weight: bold; color: #123; background-color: #f0f0f0;
+			border-bottom-color: #ccc; border-bottom-style: solid; border-bottom-width: 1}
+		dd {margin-left: 1.5em; margin-bottom: 0.25em}
+		ul {list-style-type: square}
+		ul.nomargin {margin: 0 2em; padding: 0}
+		img {margin: 1em}
+
+		td.header {background: url(img/header_t_blue.gif) 0 0 repeat-x;
+			padding: 0.9em 0.4em 0.5em 0.6em; margin: 0.5em 0; color: #def;
+			font-family: Arial, Helvetica, sans-serif; font-size: 30px; font-weight: bolder}
+		td.mainicon {background: url(img/header_t_blue.gif) 0 0 repeat-x}
+		td.crumbles {font-size: 11px}
+		td.header_l {background: url(img/header_tl_blue.gif) 0 0 no-repeat}
+		td.header_r {background: url(img/header_tr_blue.gif) 100% 0 no-repeat}
+		td.footer {background: url(img/shadow_b_blue.gif) 0 0 repeat-x}
+		td.footer_l {background: url(img/shadow_bl_blue.gif) 0 0 no-repeat}
+		td.footer_r {height: 52px; background: url(img/shadow_br_blue.gif) 100% 0 no-repeat}
+		td.shadow_l {background: #F7F7F7 url(img/shadow_l_blue.gif) 0 0 repeat-y}
+		td.shadow_r {background: #F7F7F7 url(img/shadow_r_blue.gif) 100% 0 repeat-y;}
+		td.shadow {background: #F7F7F7}
+
+		form {margin: 0}
+		fieldset {padding: 8px; background-color: #F0F0FF}
+		th {font-weight: bold; background-color: #dddddd}
+		a.Discrete {text-decoration: none}
+		a.Discrete:hover {text-decoration: underline}
+		img.Right {float: right; margin: 0.6em 1.2em}
+		img.mainicon {margin:10px 0; border: none}
+		
+		fieldset.NELM {background-color: #F0F0CC}
+		td.MainResult {font-size: 16px}
+	</style>
+	<script>
+		function radioValue(e) {
+			for (var i = 0; i < e.length; i++) if (e[i].checked) return e[i].value;
+		}
+		function computeEyePupil() {
+			var AG = parseFloat(document.forms[0].age.value);
+			if (! isNaN(AG)) {
+				var DE = 7*Math.exp(-AG*AG/20000);        // DIAM EYE PUPIL IN MM
+				if (DE < 4) DE = 4;
+				document.forms[0].eyeexit.value = Math.round(DE*10) / 10;
+			}
+		}
+		function computeNELM() {
+			var ff = document.forms[0];
+			var SQ = parseFloat(ff.sqm.value);
+			if (! isNaN(SQ)) {
+				var KV = parseFloat(ff.extinction.value);
+				var BS = 34.08 * Math.exp(20.7233 - 0.92104 * SQ)
+				var MZ = 8.68 - 5 * Math.log(1 + 0.158 * Math.sqrt(BS))/Math.LN10
+				ff.limit.value = Math.round(MZ*10) / 10;
+			}
+		}
+		function loaded() {
+		}
+		function calculate() {
+			var ff = document.forms[0];
+			var UseInch = ff.UNITS.selectedIndex == 1;
+			var D = parseFloat(ff.aperture.value);
+			if (UseInch) D = D * 25.4;
+			var MG = parseFloat(ff.power.value);
+			var MZ = parseFloat(ff.limit.value);
+			if (isNaN(MZ)) {
+				computeNELM();
+				MZ = parseFloat(ff.limit.value);
+			}
+			var CI = parseFloat(ff.ci.value);
+			var Z = parseFloat(ff.zenith.value) * Math.PI/180;
+			var KV = parseFloat(ff.extinction.value);
+			var SE = parseFloat(ff.seeing.value);
+			var EX = parseFloat(radioValue(ff.experience))
+			var DE = parseFloat(ff.eyeexit.value);
+			if (isNaN(DE)) {
+				computeEyePupil();
+				DE = parseFloat(ff.eyeexit.value);
+			}
+			var TelescopeType = radioValue(ff.Teletype);
+			var Reflectivity = 0.01 * radioValue(ff.coating)
+			var CL = parseFloat(radioValue(ff.cleanliness));
+
+			// Compute transmission of telescope
+			var DS,FL
+			if (TelescopeType == 2) {           // refractor
+				DS = 0;                         // no central obstruction
+				FL = Math.pow(0.99,4);          // 99% transmission on 4 air-glass surfaces
+			}
+			else if (TelescopeType == 1) {      // reflector
+				DS = 0.20*D;                    // 20% CO
+				FL = Math.pow(Reflectivity,2);  // 88% reflectivity on 2 surfaces
+			}
+			else if (TelescopeType == 3) {      // SCT
+				DS = 0.35*D;                    // 35% CO
+				FL = Math.pow(0.99*Reflectivity,2);  // 2 air-glass surfaces, 2 reflections
+			}
+			FD = 1.0 - Math.pow(DS/D,2);        // obstruction 
+			FO = 0.94;		                    // eyepiece transmission (4 coated air-glass surfaces)
+			if (TelescopeType != 1)
+				FO = FO*0.97                    // diagonal 97% reflectivity
+			FO = FO * (1 - CL)                  // dirty optics
+			FT = 1/(FL*FD*FO);                  // total transmission of telescope
+
+			// Compute sky brightness from NELM in zenith
+			FS = 1.0;                           // observer's eyesight
+			K = 1.2 * KV;                       // extinction corrected to 510 nm (averted vision)
+			MZZ = MZ + K;                       // zenith NELM without atmosphere
+			if (MZZ >= 7) {
+				BS = 54;		                // best possible sky brightness => Ba = 21.58
+				FS = Math.pow(10,0.4*(7-MZZ));	// good eyesight correction
+			}
+			else {
+				XX = 0.2*(8.68-MZZ);               //  FS ASSUMED = 1  ; 8.68 = 7.93 + 0.75
+				BS = 39.7 * Math.pow((Math.pow(10,XX)-1),2);              // SKY BRIGHTNESS FOR MZ
+			};
+			
+			// Compute sky brightness in telescope
+			FB = Math.sqrt(2);                  // binocular vision
+			DP = D/MG;                          // diam of exit pupil
+			FP = 1.0;				         
+			if (DE < DP) FP = DP*DP/(DE*DE);    // light outside pupil
+			FA = DE*DE/(D*D);                   // light-collecting area
+			FM = MG*MG;                         // spread of sky photons
+			FC = Math.pow(10,0.4*(CI/2-1));     // color of star
+			BS = BS * (1 + 0.5*Z*Z);		    // correction for zenith distance
+			B = BS / (FB * FT * FP * FA * FM * FC);  // background brightness in telescope
+
+			// Compute Limiting Magnitude in telescope
+			CC = 1.58e-10;                      // night-vision constant
+			KK = 0.0126;                        // night-vision constant
+			FE= Math.pow(10,0.4*K/Math.cos(Z)); // atmospheric extinction
+			TH = SE*MG;                         // apparent diameter of seeing disk (arc-sec)  corrections
+			FR = 1.0;                           
+			if (TH>900) FR = Math.sqrt(TH/900); // a point source can appear extended
+			I = CC*Math.pow(1 + Math.sqrt(KK*B),2);	  // Hecht (JOSA,v37,p59,1947)
+			IS = I*FB*FE*FT*FP*FA*FR*FC*FS;     	  // for no scope, no air
+			M = -16.57 - 2.5*Math.log(IS)/Math.LN10;  // intensity to v mag
+			M = M + (EX-6)*0.16;				// empirical experience correction
+			document.getElementById('magnitude').innerHTML = Math.round(M*10) / 10;
+			return true
+		}
+	</script>
+</head>
+
+<body onload="loaded()">
+
+<!-- Header -->
+<center><table align="center" cellpadding=0 cellspacing=0>
+<tr>
+<td class="header_l" width="20"></td>
+<td><table cellspacing=0 cellpadding=0 width="100%"><tr>	<td class="mainicon" valign="bottom"></td>
+	<td class="header" width="100%">望远镜极限星等计算器</td>
+</tr></table></td>
+<td class="header_r" width="20"></td>
+</tr>
+<tr><td class="shadow_l" width="20"><td bgcolor="#ffffff" width="840" style="padding: 2 20 10 20">
+<!-- Header -->
+
+<form>
+
+<h2>请输入您的观测条件</h2>
+<form>
+<fieldset>
+<legend>&nbsp;望远镜&nbsp;</legend>
+<table>
+<tr><td>望远镜口径:<td><input name="aperture" size="5" value="10"> <select name="UNITS"><option>毫米<option selected>英寸</select>
+<tr><td>放大倍数:<td><input name="power" size="5" value="250">
+<tr><td>望远镜类型:<td><table cellspacing=0 cellpadding=1>
+<tr><td><input id="tt1" type="radio" name="Teletype" value="1" checked><td><label for="tt1">反射望远镜</label><td>&nbsp;&nbsp;&nbsp;&nbsp;
+<td><input id="tt2" type="radio" name="Teletype" value="2"><td><label for="tt2">折射望远镜</label><td>&nbsp;&nbsp;&nbsp;&nbsp;
+<td><input id="tt3" type="radio" name="Teletype" value="3"><td><label for="tt3">施卡望远镜</label>
+</tr></table></td>
+<tr><td>镀膜:<td><table cellspacing=0 cellpadding=1><tr>
+<td><input id="coat1" type="radio" name="coating" value="88" checked><td><label for="coat1">标准版(88%反射率)</label>&nbsp;&nbsp;&nbsp;&nbsp;
+<td><input id="coat2" type="radio" name="coating" value="95"><td><label for="coat2">增强版(95%反射率)</label>
+</tr></table></td>
+<tr><td>镜片洁净程度:<td><table cellspacing=0 cellpadding=1><tr>
+<td><input id="cl1" type="radio" name="cleanliness" value="0.3"><td><label for="cl1">脏</label>&nbsp;&nbsp;&nbsp;&nbsp;
+<td><input id="cl2" type="radio" name="cleanliness" value="0.15" checked><td><label for="cl2">正常</label>&nbsp;&nbsp;&nbsp;&nbsp;
+<td><input id="cl3" type="radio" name="cleanliness" value="0"><td><label for="cl3">干净</label>
+</tr></table></td>
+</table>
+</fieldset>
+
+<fieldset>
+<legend>&nbsp;观测者&nbsp;</legend>
+<table>
+<tr><td>瞳孔最大直径:<td><input name="eyeexit" size="3" value="6"><td>毫米
+<td>&nbsp;&nbsp;&nbsp;&nbsp;<b>或者</b>&nbsp;&nbsp;&nbsp;&nbsp;<td>年龄:<td><input name="age" size="3" onchange="computeEyePupil()"><td>岁
+</table>
+<table>
+<tr><td>观测经验:&nbsp;&nbsp;<td><table cellspacing=0 cellpadding=1><tr>
+<td><label for="exp1">萌新</label><td><input id="exp1" type="radio" name="experience" value="1">
+<td><input type="radio" name="experience" value="3">
+<td><input type="radio" name="experience" value="5" checked>
+<td><input type="radio" name="experience" value="7">
+<td><input id="exp3" type="radio" name="experience" value="9"><td><label for="exp3">专家</label>
+</tr></table></td>
+</table>
+</fieldset>
+
+<fieldset>
+<legend>&nbsp;夜空条件&nbsp;</legend>
+<table>
+<tr><td>天顶附近的肉眼极限星等:<td><input name="limit" size="4" value="6.0">
+<td>&nbsp;&nbsp;&nbsp;&nbsp;<b>或者</b>&nbsp;&nbsp;&nbsp;&nbsp;<td>SQM读数:<td><input name="sqm" size="5" onchange="computeNELM()"><td>mag/sec²
+</table>
+
+<table>
+<tr><td>视宁度:<td><input name="seeing" size="4" value="1"><td>角秒<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<td>星点的颜色指数(见附录):<td><input name="ci" size="4" value="0">
+<tr><td>天顶距:<td><input name="zenith" size="4" value="30"><td>度<td>
+<td>消光系数:<td><input name="extinction" size="4" value="0.3"><td>mag/atm
+</table>
+</fieldset>
+</form>
+
+<br>
+<fieldset class="NELM">
+<table>
+<tr><td><input type="button" value="计算" onClick="calculate()" style="font-size: 16px; font-weight:bold; padding: 4">&nbsp;&nbsp;
+<td class="MainResult">预计使用此望远镜的极限星等为 <b><span id="magnitude"></span></b>
+</tr></table>
+</fieldset>
+
+
+<h2>附录(一定要看啊!)</h2>
+
+<dl>
+<dt>望远镜口径
+<dd>望远镜的口径,不用我再解释了吧。
+
+<dt>放大倍数
+<dd>望远镜的放大倍率,计算方法是物镜焦距除以目镜焦距。
+<dd>高倍率有助于看到更暗弱的星(译者注:但是倍率别高过头到无效放大了)。
+<dd>如果视宁和光学设计允许,最高每英寸口径可能可以上到50~75倍。
+
+<dt>望远镜类型
+<dd><ul class="nomargin">
+<li>牛反-主副镜各有一块反射镜(译者注:原作者只提到了牛反,姑且认为所有业余反射镜都选这个吧)。
+<li>折射镜-物镜是透镜。
+<li>施卡望远镜-一块折射改正镜,外加主副镜各有一块反射镜(译者注:原作者也没提到马卡等折反射,所以马卡马牛之类也选这个好了)。
+</ul>
+
+<dt>镀膜类型
+<dd>(此选项不适用于折射镜)
+<dd>如果你的镜子只是个普通的厂制品,大概率就是88%的标准版。如果是dalao特别定制过的增强版就选95%吧!
+
+<dt>镜片洁净程度
+<dd>你的物镜和目镜脏不脏,你说了算。
+
+<dt>瞳孔最大直径(是你的,不是马门溪龙的)
+<dd>此选项仅与低倍观测有关。
+<dd>正常人完全放大的瞳孔直径在4毫米到7毫米之间,具体取决于人的年龄,但是不同人差距很大。
+<dd>一个看似违反直觉的结果是,通过在不修改任何其他值的情况下减小瞳孔直径(增加年龄),计算出的望远镜极限星等会增加。
+<dd>再想一想,这个结果似乎是河狸的:能到达同一个肉眼极限星等数据(NELM)且瞳孔较小的观测者应该能够在高倍望远镜中看到更深的东西(译者注:高倍率观测不需要很大的出瞳直径),
+因为年龄的原因瞳孔直径减小,肉眼极限星等也是减小的。(有点绕,需要跟其他参数联动,但是想明白了就知道为什么了)
+
+<dt>观测经验
+<dd>这个选项比较主观,大概包含了暗视力,或知道如何寻找目标等能力。
+<dd>比较离谱,萌新和大佬之间可能会差距很大。
+
+<dt>天顶附近的肉眼极限星等(NELM)
+<dd>这是你能用肉眼看见的天顶附近最暗星的星等。
+<br>一般来说城市里比较差劲,只有2~3等,但是郊外可能能达到6等,在环境极好的地方甚至可以看到7等星。
+
+<dt>SQM读数</dt>
+<dd>你可以用SQM计来测量当前环境的SQM读数,参考<a href="http://unihedron.com/projects/darksky/" target="_blank">SQM meter</a>.
+<dd>一般可以用下表大致换算:
+<ul>
+<li>SQM = 22.0 => NELM = 7.0
+<li>SQM = 21.0 => NELM = 6.4
+<li>SQM = 20.0 => NELM = 5.7
+<li>SQM = 19.0 => NELM = 4.9
+</ul>
+<dd>大气的透明度和观测者的视力都会影响换算,所以看个大概,就这样吧。
+
+<dt>视宁度
+<dd>星点的直径(译者注:应该就是半高宽FWHM)取决于大气的稳定程度，单位为角秒(arc-sec)。
+<dd>这个数值可以从不到1角秒到好几个角秒。(译者注:通常中国大陆的视宁度都在2~5角秒之间,低于2角秒的视宁可能得烧高香)
+<dd>数值得从望远镜中目测估计(译者注:我也不知道怎么目视估计,拍摄的话看下星点大小的半高宽就行了)。
+<dd>糟糕的视宁度会大大削弱高倍率的极限星等优势。
+
+<dt>星点的颜色指数
+<dd>数值从0(白色星星)、0.5(黄色星星)到大于1(红色星星)不等,蓝色星星的话数值为负数。
+
+<dt>天顶距
+<dd>目标距离天顶的角度,与地平高度互余(比如地平高度为60度,则天顶距为30度)。越接近天顶的位置天光更暗,能看到更暗弱的恒星。
+
+<dt>大气消光指数
+<dd>通常为0.2-0.6 mag./airmass,高海拔地区甚至可以达到0.15。一般地区默认填写0.3。
+
+</dl>
+</form>
+
+<h2>Credits</h2>
+<ul class="nomargin">
+<li>Bradley Schaefer's article "Telescopic Limiting Magnitudes" in Publications of the
+Astronomical Society of the Pacific, February 1990 
+<li>Nils Olof Carlin's <a href="http://web.telia.com/~u41105032/visual/Schaefer.htm" target="_blank">interesting discussion of the Schaefer article</a>
+<li>Larry Bogan's <a href="http://www.go.ednet.ns.ca/~larry/astro/maglimit.html" target="_blank">conversion to JavaScript</a> on 
+which this page is based (with some corrections and additions)
+</ul>
+
+
+<!-- Footer -->
+</td><td class="shadow_r"></tr>
+<tr><td class="footer_l"></td><td class="footer" height="20" align="center"><table cellspacing=0 cellpadding=0 border=0 width="100%"><tr>
+<td align="left" class="crumbles">&copy; 2008-2010 Cruxis, Robert Houdart
+<td>汉化&修改 By Fluorine Zhu(@正七价的氟离子) & Lynx Zhou(@电波系山猫)</td><td class="crumbles" align="right"><a href="https://www.cruxis.com/scope/limitingmagnitude.htm">原地址链接</a></td>
+</tr></table></td><td class="footer_r"></td></tr></table></center>
+
+<script src="https://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-1271790-1";
+urchinTracker();
+</script>
+<!-- Footer -->
+</body>
+</html>
